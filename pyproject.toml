@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "puz-grabber"
+version = "0.1.0"
+description = "Puzzle downloader utility"
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = ["requests", "bs4"]
+
+# Optional: entry point for CLI (runs __main__.py when installed)
+[project.scripts]
+puz-grabber = "puz_grabber.__main__:main"
+
+# Optional: dependencies if you add any later
+
+[tool.setuptools.packages.find]
+where = ["src"]
