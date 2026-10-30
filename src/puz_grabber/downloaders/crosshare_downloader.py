@@ -63,7 +63,7 @@ class CrosshareDownloader:
 
     def download(self):
         puzzle_file = requests.get(f"https://crosshare.org/api/puz/{self.id}")
-        filename = f"{self.outlet} ({self.date:%a., %b %d, %Y}): {self.title}_{self.code}_{self.date:%Y%m%d}.puz"
+        filename = f"{self.outlet} ({self.date:%a., %b %d, %Y})_{self.code}_{self.date:%Y%m%d}.puz"
         filename = filename.replace("/", "-")
         try:
             with open(filename, "wb") as f:
