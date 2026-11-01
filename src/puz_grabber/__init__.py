@@ -1,4 +1,4 @@
 """puz-grabber package"""
-__version__ = "0.1.1"
+__version__ = "0.1.0"
 
 from .config import SOURCES

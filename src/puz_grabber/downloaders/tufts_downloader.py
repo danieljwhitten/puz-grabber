@@ -1,40 +1,30 @@
 import requests
-from datetime import datetime
+from requests.exceptions import ConnectTimeout, ReadTimeout
 from bs4 import BeautifulSoup 
-from .crosshare_downloader import CrosshareDownloader
+from .crosshare_downloader import CrosshareBaseDownloader
 import re
 
-class TuftsDownloader(CrosshareDownloader):
-
-    def __init__(self, puzzle_code = "td"):
-        super().__init__(puzzle_code)
+class TuftsDownloader(CrosshareBaseDownloader):
 
     def get_latest_id(self):
-        headers = {'User-Agent': 'Googlebot'}
-        response = requests.get(self.base_url, headers=headers)
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        try:
+            response = requests.get(self.base_url, headers=headers, timeout=(5.05, 15))
+        except (ConnectTimeout, ReadTimeout) as e:
+            print(f"Failed to get page {self.base_url}: {e}")
+            return None
         soup = BeautifulSoup(response.text, 'html.parser')
         link = soup.select_one('a[href*="/article/"][href*="mini-crossword-"]')
         puzzle_page_url = link["href"] if link else None
-        response = requests.get(puzzle_page_url, headers=headers)
-        return re.search(r'https://crosshare.org/embed/(.*?)/', response.text).group(1)
-
-    def get_meta(self):
-        headers = {'User-Agent': 'Googlebot'}
-        webpage = requests.get(self.url, headers=headers)
-        if webpage.status_code == 200:
-            soup = BeautifulSoup(webpage.text, 'html.parser')
-            try:
-                date_section = soup.find('p', class_='overflowWrapBreakWord').get_text()
-                date_text = re.search(r'\d{4}-\d{2}-\d{2}', date_section).group(0)
-                date_text = re.sub(r'[^\d-]', '', date_text)
-                date = datetime.strptime(date_text, '%Y-%m-%d').date()
-            except (ValueError, AttributeError, TypeError) as e:
-                print(f"Could not extract date from {self.url}: {e}")
-                date = None 
-            try:
-                meta_tag = soup.find('meta', property='og:title')
-                title = meta_tag.get('content') if meta_tag else None
-            except (ValueError, AttributeError, TypeError) as e:
-                print(f"Could not extract title from {self.url}: {e}")
-                title = None
-            return (date, title)
+        if puzzle_page_url is None:
+            print(f"No mini crossword link found at {self.base_url}")
+            return None
+        try:
+            response = requests.get(puzzle_page_url, headers=headers, timeout=(5.05, 15))
+        except (ConnectTimeout, ReadTimeout) as e:
+            print(f"Failed to get page {puzzle_page_url}: {e}")
+            return None
+        if match := re.search(r'https://crosshare\.org/embed/([A-Za-z0-9]+)', response.text):
+            return match.group(1)
+        print(f"No embed URL found in {puzzle_page_url}")
+        return None

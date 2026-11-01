@@ -2,7 +2,7 @@ SOURCES = {
         "dc": { "outlet": 'Duke Chronicle', 
                 "base_url": 'https://crosshare.org/chroniclecrossword',
                 "source": 'crosshare'},
-        "cds": {"outlet": 'Colombia Daily Spectator', 
+        "cds": {"outlet": 'Columbia Daily Spectator', 
                 "base_url": 'https://crosshare.org/CUDailySpectator',
                 "source": 'crosshare'},
         "cs": { "outlet": 'CROSSHARE',
