@@ -93,4 +93,25 @@ class CrosshareBaseDownloader:
         except OSError as e:
             print(f"Failed to download file {self.filename}: {e}")
 
+class CrosshareDailyDownloader(CrosshareBaseDownloader):
 
+    def get_date(self):
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        try:
+            webpage = requests.get(self.base_url, headers=headers, timeout=(5.05, 15))
+        except (ConnectTimeout, ReadTimeout) as e:
+            print(f"Failed to get page {self.url}: {e}")
+            return None
+        if webpage.status_code != 200:
+            print(f"Could not reach webpage at: {self.url}")
+            return None
+        soup = BeautifulSoup(webpage.text, 'html.parser')
+        date_section = soup.find('h3', class_='marginBottom0')
+        if date_section and (match := re.search(r'\d{1,2}\/\d{1,2}\/\d{4}', date_section.get_text())):
+            try:
+                return datetime.strptime(re.sub(r'[^\d\/]', '', match.group(0)), '%m/%d/%Y').date()
+            except ValueError as e:
+                print(f"Could not determine date from {self.url}: {e}")
+        else:
+            print(f"No date found in {self.url}")
+            return None

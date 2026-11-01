@@ -5,9 +5,9 @@ SOURCES = {
         "cds": {"outlet": 'Columbia Daily Spectator', 
                 "base_url": 'https://crosshare.org/CUDailySpectator',
                 "source": 'crosshare'},
-        "cs": { "outlet": 'CROSSHARE',
+        "cs": { "outlet": 'CROSSHARE Daily Mini',
                 "base_url":'https://crosshare.org/dailyminis',
-                "source": 'crosshare'},
+                "source": 'crossharedaily'},
         "td": { "outlet": 'The Tufts Daily', 
                 "base_url": 'https://www.tuftsdaily.com/section/crossword',
                 "source": "tufts"}
