@@ -10,5 +10,8 @@ SOURCES = {
                 "source": 'crossharedaily'},
         "td": { "outlet": 'The Tufts Daily', 
                 "base_url": 'https://www.tuftsdaily.com/section/crossword',
+                "source": "tufts"},
+        "tdm": { "outlet": 'The Tufts Daily Mini', 
+                "base_url": 'https://www.tuftsdaily.com/section/crossword',
                 "source": "tufts"}
 }
