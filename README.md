@@ -11,3 +11,5 @@ Folks who want to get `.puz` files from sites with embedded crossword puzzles sh
 + `npm` [Nebraska Public Media Labs](https://crosshare.org/npmlabs)
 + `td`,`tdm`: [Tufts Daily](https://www.tuftsdaily.com/section/crossword) [`td` gets the latest full crossword, `tdm` gets the latest mini crossword]
 + `que`: [Queerty](https://www.queerty.com/tag/crossword/)
+
+Use `all` to download latest puzzles for all listed sources.
