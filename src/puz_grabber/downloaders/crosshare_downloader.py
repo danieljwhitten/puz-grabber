@@ -78,7 +78,10 @@ class CrosshareBaseDownloader:
             print(f"Failed to reach {file_url}: Status {puzzle_file.status_code}")
             return
         if self.date:
-            filename = f"{self.outlet} ({self.date:%a., %b %d, %Y})_{self.code}_{self.date:%Y%m%d}.puz"
+            if SOURCES[self.code]["date_in_filename"]:
+                filename = f"{self.outlet} ({self.date:%a., %b %d, %Y})_{self.code}_{self.date:%Y%m%d}.puz"
+            else:
+                filename = f"{self.outlet}_{self.code}_{self.date:%Y%m%d}.puz"
         else:
             filename = f"{self.outlet} (undated)_{self.code}_{self.id}.puz"
         filename = filename.replace("/", "-")
