@@ -1,4 +1,8 @@
 SOURCES = {
+        "bc": {"outlet": 'Black Crossword', 
+                "base_url": 'https://crosshare.org/blackcrossword',
+                "source": 'crosshare',
+                "date_in_filename" : False},
         "cds": {"outlet": 'Columbia Daily Spectator', 
                 "base_url": 'https://crosshare.org/CUDailySpectator',
                 "source": 'crosshare',
