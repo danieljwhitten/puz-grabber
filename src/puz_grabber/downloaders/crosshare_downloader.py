@@ -79,7 +79,7 @@ class CrosshareBaseDownloader:
             return
         if self.date:
             if SOURCES[self.code]["date_in_filename"]:
-                filename = f"{self.outlet} ({self.date:%a., %b %d, %Y})_{self.code}_{self.date:%Y%m%d}.puz"
+                filename = f"{self.outlet} ({self.date:%a., %b %-d, %Y})_{self.code}_{self.date:%Y%m%d}.puz"
             else:
                 filename = f"{self.outlet}_{self.code}_{self.date:%Y%m%d}.puz"
         else:
