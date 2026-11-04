@@ -19,7 +19,7 @@ class TuftsDownloader(CrosshareBaseDownloader):
         if self.code == "tdm":
             link = soup.select_one('a[href*="/article/"][href*="mini-crossword-"]')
         else:
-            link = soup.select_one('a[href*="/article/"][href*="crossword-"]')
+            link = soup.select_one('a[href*="/article/"][href*="/crossword-"]')
         puzzle_page_url = link["href"] if link else None
         if puzzle_page_url is None:
             print(f"No mini crossword link found at {self.base_url}")

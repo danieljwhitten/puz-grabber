@@ -21,7 +21,7 @@ def get_puzzle(handler, code):
     try:
         puzzle = handler(code)
     except RuntimeError as e:
-        print(f"Failed to initialize handler for {args.puzzle_code}: {e}")
+        print(f"Failed to initialize handler for {code}: {e}")
         return
     puzzle.write_file()
 
