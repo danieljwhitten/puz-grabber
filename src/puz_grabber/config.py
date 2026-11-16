@@ -1,4 +1,8 @@
 SOURCES = {
+        "beq": {"outlet": 'Brendan Emmett Quigley', 
+                "base_url": 'https://brendanemmettquigley.com/',
+                "source": 'beq',
+                "date_in_filename" : False},
         "bc": {"outlet": 'Black Crossword', 
                 "base_url": 'https://crosshare.org/blackcrossword',
                 "source": 'crosshare',
